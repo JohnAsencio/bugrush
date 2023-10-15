@@ -8,8 +8,8 @@
 
 using namespace std;
 
-#define ASSERT_EQUAL_BOARDS(expected, actual)                  \
-    if (areEqual(expected, actual)) {                       \
+#define ASSERT_EQUAL_BOARDS(expected, actual)           \
+    if (areEqual(expected, actual)) {                   \
         cout << "PASSED: " << __FUNCTION__ << endl;     \
     } else {                                            \
         cerr << "FAILED: " << __FUNCTION__ << endl;     \
@@ -28,6 +28,7 @@ int display_board(const vector<vector<char> > board) {
 
     return 0;
 }
+
 bool areEqual(const vector<vector<char> >& vect1, const vector<vector<char> >& vect2) {
     
     display_board(vect1);
@@ -71,7 +72,7 @@ int testFileRead(const string& file) {
 
     vector<vector<char> > input;
 
-    input = initState(file);
+    input = init_state(file);
     ASSERT_EQUAL_BOARDS(dumb2x2, input);
    return 0;
 }

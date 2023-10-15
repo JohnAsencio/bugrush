@@ -5,9 +5,9 @@ int main(int argc, char** argv) {
     State initialState;
 
     // Populate initialState.board and other fields accordingly.
-    initialState.board = initState(argv[1]);
+    initialState.board = init_state(argv[1]);
 
-    int moves = solvePuzzle(initialState);
+    int moves = solve_puzzle(initialState);
     
     if (moves != -1) {
         cout << "The puzzle is solved in " << moves << " moves." << endl;

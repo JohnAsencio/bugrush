@@ -1,5 +1,8 @@
 {
+    "C_Cpp.default.cppStandard": "c++11",
     "files.associations": {
-        "vector": "cpp"
+        "vector": "cpp",
+        "iosfwd": "cpp",
+        "map": "cpp"
     }
 }
