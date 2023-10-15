@@ -19,7 +19,7 @@ class State {
         //Return a list of possible moves
         vector<vector<char> > valid_moves() {
             vector<vector<char> > temp;
-            temp[0].push_back('d');
+           // temp[0].push_back('d');
             return temp;
         }           
 
@@ -60,7 +60,7 @@ int solve_puzzle(const State& initialState) {
    // start.parent = NULL;
     map<State, bool> visited;
 
-    //visited.insert(pair<State, bool>(start, true));   
+    visited.insert(pair<State, bool>(start, true));   
 
     queue<State> q;
 
@@ -79,13 +79,13 @@ int solve_puzzle(const State& initialState) {
                 return m.size();
             }
 
-           // if (visited[c] == true) {
-             //   continue;
-           // }
+            if (visited[c] == true) {
+                continue;
+            }
         }
 
      //   c.parent = &s;
-       // visited.insert(make_pair(c, true));   
+        visited.insert(make_pair(c, true));   
         q.push(c);
     }
     //start.moved = -1;
