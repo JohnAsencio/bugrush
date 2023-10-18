@@ -77,7 +77,73 @@ int testFileRead(const string& file) {
    return 0;
 }
 
-int a() {
+int testRepeatVisited() {
+
+    return 0;
+}
+
+int display_path(const State m)
+{
+    display_board(m.board);
+    cout << '\n';
+
+    if (!m.parent)
+        return 1;
+    return display_path(*m.parent);
+}
+
+vector<State> solve_puzzle_moves(const State& initialState) {
+
+    vector<State> solved;
+
+    State start(initialState);
+    unordered_set<State, Hash> visited;
+
+    visited.insert(start);
+
+    queue<State> q;
+
+    q.push(start);
+
+    while (!q.empty()) {
+        State s(q.front());
+        q.pop();
+
+        vector<State> ms = s.valid_moves();
+
+        for (State m : ms) {
+            State c(s);
+            c.make_move(m);
+            if (visited.find(c) != visited.end()) {
+                continue;
+            }
+            if (is_solved(c)) {
+                solved.push_back(c);
+            }
+            else { 
+                c.parent = new State(c);
+                visited.insert(c);
+                q.push(c);
+            }
+        }
+    }
+
+    return solved;
+}
+
+
+int trackMovesV(const string& file) {
+
+    State initialState;
+    initialState.board = init_state(file);
+    vector<State> solved = solve_puzzle_moves(initialState);
+
+    for (int i = 0; i < solved.size(); i++)
+    {
+        cout << "SOLVED SOL " << i << endl; 
+        display_path(solved[i]);
+        cout << '\n';
+    }
 
     return 0;
 }
@@ -88,19 +154,19 @@ int a() {
 int main(int argc, char* argv[]) {
     vector<string> tests;
 
-    if (argc == 3)  {  
-        tests.push_back("testFileRead");
-    } else {
-        for (int i = 2; i < argc; ++i) {
+        for (int i = 1; i < argc; ++i) {
             tests.push_back(argv[i]);
         }
-    }
 
      for (const string& test : tests) {
         if (test == "testFileRead") {
             testFileRead(argv[1]);
-        } else if (test == "a") {
-            a();
+        }
+        else if (test == "testRepeatVisited") {
+            testRepeatVisited();
+        }
+        else if (test == "trackMovesV") {
+            trackMovesV(argv[1]);
         }
      }
      return 0;
